@@ -9,12 +9,17 @@ export const AppReadFile = () => {
 
     const handleFileChange = ({ target }) => {
 
-        if (target.files.length === 0) return;
+        if (target.files.length === 0) {
+            setWinnerMessage(null);
+            setFile(null);
+            return;
+        }
 
         const [name, extension] = target.files[0].name.toLocaleUpperCase().split('.');
 
         if (extension !== 'TXT') {
             target.value = '';
+            setWinnerMessage(null);
             return Swal.fire({
                 title: 'Extension del archivo invalida.',
                 html: 'La extensión del archivo debe ser .txt',
